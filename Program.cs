@@ -2,21 +2,32 @@
 
 Random rand = new Random();
 
-int Defensores = 500;
-int Atacantes = 1000;
+int Defensores = 10;
+int Atacantes = 100;
 int qtBatalha = 0;
-int win = 0;
+int winAtack = 0;
+int winDef = 0;
 Queue<int> defensores = new Queue<int>();
 Queue<int> atacantes= new Queue<int>();
 
-GenerateDice(defensores, Defensores);
-GenerateDice(atacantes, Atacantes);
-Game(Defensores, Atacantes);
-
-void Game(int totalDefensores, int totalAtacantes)
+void lockParallelForRun()
+{
+    Parallel.For(0, 500, i =>
+    {
+        lock(rand)
+        {
+            Game(Defensores, Atacantes);
+            
+        }
+    });
+}
+string Game(int totalDefensores, int totalAtacantes)
 {
     while(totalDefensores != 0 && totalAtacantes > 1)
     {
+        GenerateDice(defensores, Defensores);
+        GenerateDice(atacantes, Atacantes);
+
         if(totalDefensores >= 3 && totalAtacantes >= 3)
         {
             qtBatalha = 3;
@@ -26,28 +37,16 @@ void Game(int totalDefensores, int totalAtacantes)
             qtBatalha = totalDefensores < totalAtacantes ? totalDefensores : totalAtacantes;
             qtBatalha = qtBatalha % 2 == 0 ? 2 : 1;
         }
-        
-        Console.WriteLine("Dados dos defensores nesta rodada:");
-        foreach(int s in defensores)
-        {
-            Console.Write(s+",");
-        }
-        Console.WriteLine();
-        Console.WriteLine("Dados dos atacantes nesta rodada:");
-        foreach(int s in atacantes)
-        {
-            Console.Write(s+",");
-        }
+
         Battle(defensores, atacantes);
-
-        win += 1;
-
         totalDefensores = defensores.Count();
         totalAtacantes = atacantes.Count();
+        DequeueGroup(defensores);
+        DequeueGroup(atacantes);
     }
 
     string vencedor = totalDefensores > totalAtacantes ? "Defensores" : "Atacantes"; 
-    Console.Write($"Sobrou defensores: {totalDefensores}, sobrou atacantes: {totalAtacantes}");
+    return vencedor;
 }
 
 int roll() => rand.Next(6) + 1;
@@ -59,7 +58,6 @@ void DequeueGroup(Queue<int> groupWar)
         groupWar.Dequeue();
     }
         
-    
 }
 void GenerateDice(Queue<int> groupWar, int n)
 {
@@ -67,29 +65,22 @@ void GenerateDice(Queue<int> groupWar, int n)
     {
         groupWar.Enqueue(roll());
     }
-
 }
 
 void Battle(Queue<int> def, Queue<int> atack)
 {
-    
     List<int> newDef = OrderDice(def);
     List<int> newAtack = OrderDice(atack);
 
-    Console.WriteLine($"Batalha: {win}");
     for(int i = 0; i < qtBatalha; i++)
     {
-        Console.WriteLine($"Luta:{i}");
-
         if(newDef[i] < newAtack[i])
         {
             atack.Enqueue(newAtack[i]);
-            Console.WriteLine($"Ataque ganhou: {newAtack[i]} X {newDef[i]}"); 
         }
         else
         {
             def.Enqueue(newDef[i]);
-            Console.WriteLine($"Defensor ganhou: {newDef[i]} X {newAtack[i]}");
         }
     }
     Console.WriteLine();
@@ -99,7 +90,6 @@ List<int> OrderDice(Queue<int> actualGroup)
 {
     List<int> newGroup = new List<int>();
 
-
     for(int i = 0; i < qtBatalha; i++)
     {
         newGroup.Add(actualGroup.Peek());
@@ -108,11 +98,5 @@ List<int> OrderDice(Queue<int> actualGroup)
     }
     newGroup = newGroup.OrderBy(i => -i).ToList();
 
-    Console.Write("Dentro da lista:");
-    for(int i = 0; i< newGroup.Count(); i++)
-    {
-        Console.Write($"{newGroup[i]},");
-    }
     return newGroup;
-    
 }
