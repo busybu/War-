@@ -2,8 +2,8 @@
 
 Random rand = new Random();
 
-int Defensores = 10;
-int Atacantes = 10;
+int Defensores = 500;
+int Atacantes = 1000;
 int qtBatalha = 0;
 int win = 0;
 Queue<int> defensores = new Queue<int>();
@@ -15,9 +15,9 @@ Game(Defensores, Atacantes);
 
 void Game(int totalDefensores, int totalAtacantes)
 {
-    while(totalDefensores != 0 || totalAtacantes != 1)
+    while(totalDefensores != 0 && totalAtacantes > 1)
     {
-        if(totalDefensores > 3 && totalAtacantes > 3)
+        if(totalDefensores >= 3 && totalAtacantes >= 3)
         {
             qtBatalha = 3;
         } 
@@ -30,12 +30,13 @@ void Game(int totalDefensores, int totalAtacantes)
         Console.WriteLine("Dados dos defensores nesta rodada:");
         foreach(int s in defensores)
         {
-            Console.WriteLine(s+",");
+            Console.Write(s+",");
         }
+        Console.WriteLine();
         Console.WriteLine("Dados dos atacantes nesta rodada:");
         foreach(int s in atacantes)
         {
-            Console.WriteLine(s+",");
+            Console.Write(s+",");
         }
         Battle(defensores, atacantes);
 
@@ -44,7 +45,9 @@ void Game(int totalDefensores, int totalAtacantes)
         totalDefensores = defensores.Count();
         totalAtacantes = atacantes.Count();
     }
-    
+
+    string vencedor = totalDefensores > totalAtacantes ? "Defensores" : "Atacantes"; 
+    Console.Write($"Sobrou defensores: {totalDefensores}, sobrou atacantes: {totalAtacantes}");
 }
 
 int roll() => rand.Next(6) + 1;
