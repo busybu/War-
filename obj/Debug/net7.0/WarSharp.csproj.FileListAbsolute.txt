@@ -1,0 +1,15 @@
+C:\Users\disrct\Documents\WarSharp\bin\Debug\net7.0\WarSharp.exe
+C:\Users\disrct\Documents\WarSharp\bin\Debug\net7.0\WarSharp.deps.json
+C:\Users\disrct\Documents\WarSharp\bin\Debug\net7.0\WarSharp.runtimeconfig.json
+C:\Users\disrct\Documents\WarSharp\bin\Debug\net7.0\WarSharp.dll
+C:\Users\disrct\Documents\WarSharp\bin\Debug\net7.0\WarSharp.pdb
+C:\Users\disrct\Documents\WarSharp\obj\Debug\net7.0\WarSharp.csproj.AssemblyReference.cache
+C:\Users\disrct\Documents\WarSharp\obj\Debug\net7.0\WarSharp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\disrct\Documents\WarSharp\obj\Debug\net7.0\WarSharp.AssemblyInfoInputs.cache
+C:\Users\disrct\Documents\WarSharp\obj\Debug\net7.0\WarSharp.AssemblyInfo.cs
+C:\Users\disrct\Documents\WarSharp\obj\Debug\net7.0\WarSharp.csproj.CoreCompileInputs.cache
+C:\Users\disrct\Documents\WarSharp\obj\Debug\net7.0\WarSharp.dll
+C:\Users\disrct\Documents\WarSharp\obj\Debug\net7.0\refint\WarSharp.dll
+C:\Users\disrct\Documents\WarSharp\obj\Debug\net7.0\WarSharp.pdb
+C:\Users\disrct\Documents\WarSharp\obj\Debug\net7.0\WarSharp.genruntimeconfig.cache
+C:\Users\disrct\Documents\WarSharp\obj\Debug\net7.0\ref\WarSharp.dll
